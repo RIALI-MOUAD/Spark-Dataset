@@ -14,7 +14,7 @@ This project is based on 4 different datasets which are 4 text files with the de
 
 ## Building Project !
 ### build.sbt :
-In this kind of projects. We have always to set up the"[build.sbt]()" file, which is in this case :
+In this kind of projects. We have always to set up the"[build.sbt]()" file, which contains in this case :
 ```scala
 name := "SparkII"
 version := "1.0"
