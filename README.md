@@ -25,5 +25,6 @@ libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.0.1"
 ```
 As it is obvious, the [build.sbt][df1] contains :
   - The project name
+  - sbt version : 1.0
   - Scala version : 2.12.13
   - libraryDependencies : here I only used one dependency which is "org.apache.spark"%%"spark-sql" % "3.0.1" 
