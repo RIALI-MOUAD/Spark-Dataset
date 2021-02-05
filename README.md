@@ -107,3 +107,13 @@ Let's take the example of getCustomer:
     return Customer
   }
 ```
+While [Customer.txt]() is like : 
+```
+CustID|Firstname|Lastname|Phone
+815001|LYNCH|JACKSON|14157317623
+815002|MOSS|FIELDS|14156874907
+815003|MCCALL|BOYLE|14151620323
+815004|DELACRUZ|MADDEN|14151364678
+815005|RUIZ|CAIN|14155195074
+...
+```
