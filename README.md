@@ -417,3 +417,88 @@ And the Total amount is :
 ```
 1489232 is the total amount of sales not refunded
 ```
+### 4-  User products:
+
+##### Description :
+This sub-project is meant to calculate total number of products for each customer.
+##### Employed Datasets :
+- Sales.txt
+- Customer.txt
+##### Objects :
+###### DataFrameFromFile.scala :
+The reason behind calling this object is to generate the Dataframes that we'll employ later to serve the project role as we are going to see in the main project object.
+
+###### UserProducts.scala : 
+The main object of this sub-project which looks like this :
+```scala
+object UserProducts {
+
+  def main(args: Array[String]): Unit = {
+    val Customer = getCustomer
+    val Sales = getSales
+    val SalesperCustomerID = Sales.groupBy("custID").sum("quantity")
+    val SalesperCustomer = SalesperCustomerID.alias("SId")
+      .join(Customer.alias("c"),Customer("custID")===SalesperCustomerID("custID"),"inner")
+      .select(col("c.custID"),
+        col("c.Firstname"),
+        col("c.Lastname"),
+        col("SId.sum(quantity)").as("Total number of products"))
+    SalesperCustomer.show()
+  }
+}
+```
+
+> How does it work ?
+
+First I defined Two immutable variables **Customer** and **Sales**. Each presents an "*org.apache.spark.sql.DataFrame*" object, generated of this two functions herited from the **DataFrameFromFile** object :
+
+```scala 
+    val Customer = getCustomer
+    val Sales = getSales
+```
+Then I define the DataFrame **SalesperCustomerID** that contains the data in **Sales** Grouped by customer Id "custID" and the sum of quantity :
+```scala
+    val SalesperCustomerID = Sales.groupBy("custID").sum("quantity")
+```
+Next, I create the DataFrame **SalesperCustomer** by joining ***SalesperCustomerID*** and ***Sales*** in order to get additional infos about the customer (first name, last name ...):  
+  
+```scala
+    val SalesperCustomer = SalesperCustomerID.alias("SId")
+      .join(Customer.alias("c"),Customer("custID")===SalesperCustomerID("custID"),"inner")
+      .select(col("c.custID"),
+        col("c.Firstname"),
+        col("c.Lastname"),
+        col("SId.sum(quantity)").as("Total number of products"))
+```
+
+#### Final Result :
+> ## Voila !!
+
+Finally we got :
+```
++------+---------+--------+------------------------+
+|custID|Firstname|Lastname|Total number of products|
++------+---------+--------+------------------------+
+|815304|   MCNEIL|   ESTES|                      36|
+|815397|    KNAPP| PERKINS|                      33|
+|815158|    MEJIA| HIGGINS|                      31|
+|815181|     REID|  MURPHY|                      14|
+|815486|  SWEENEY|  HOWELL|                      22|
+|815051|   FIELDS|      HO|                      37|
+|815334|   HORTON|    KANE|                      29|
+|815272|   WERNER|   WEEKS|                      29|
+|815497| SHEPHERD|   HUANG|                      26|
+|815404|  STANTON|   JAMES|                      22|
+|815187|    WEBER| VAZQUEZ|                      31|
+|815119|   HUNTER|  TURNER|                      23|
+|815137|   HOLMES|TRUJILLO|                      37|
+|815219|    BARRY|  DUNCAN|                      29|
+|815338|    BROCK| BURGESS|                      19|
+|815302|    MOSES|   BROCK|                      38|
+|815068|   VARGAS|  WAGNER|                      18|
+|815253|   DORSEY|   COWAN|                      20|
+|815336|     ROSS|SANTIAGO|                      35|
+|815085|   PRINCE|  CAMPOS|                      43|
++------+---------+--------+------------------------+
+only showing top 20 rows
+```
