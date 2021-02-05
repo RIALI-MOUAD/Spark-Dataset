@@ -86,3 +86,23 @@ object DataFrameFromFile {
   }
 }
 ```
+
+Besides the immutable variable [sc] which generates  "[SparkSession](https://spark.apache.org/docs/latest/api/scala/org/apache/spark/sql/SparkSession.html)" Object, I created 4 functions, each one of them generates a specefic [DataFrame](https://spark.apache.org/docs/latest/api/scala/org/apache/spark/sql/index.html#DataFrame=org.apache.spark.sql.Dataset[org.apache.spark.sql.Row]) : Customer, Product, Sales, Refund.
+Let's take the example of getCustomer:
+```scala
+ def getCustomer: org.apache.spark.sql.DataFrame ={
+    val customer = "Customer.txt"
+    val Customer_scheme = StructType(Array(
+      StructField("CustID", IntegerType, false),
+      StructField("Firstname", StringType, false),
+      StructField("Lastname", StringType, false),
+      StructField("Phone", StringType, true)
+    ))
+    val Customer = sc.read
+      .option("sep", "|")
+      .option("header", true)
+      .schema(Customer_scheme)
+      .csv(customer)
+    return Customer
+  }
+```
