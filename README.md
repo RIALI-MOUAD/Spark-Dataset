@@ -146,3 +146,35 @@ root
 
 ### Sub-Projects :
 
+#### 1- Sales Distribution :
+
+##### Description :
+This sub-project is meant to evaluate the amount and quantity for each product name.
+##### Employed Datasets :
+- Product.txt
+- Sales.txt
+##### Objects :
+###### DataFrameFromFile.scala :
+The reason behind calling this object is to generate the Dataframes that we'll employ later to serve the project role as we are going to see in the main project object.
+###### SalesDistribution.scala : 
+The main object of this sub-project which looks like this :
+```scala
+object SalesDistribution {
+  //val sc: SparkSession = sc
+
+    def main(args: Array[String]): Unit = {
+      val Sales:org.apache.spark.sql.DataFrame = getSales
+      val Products:org.apache.spark.sql.DataFrame=getProduct
+      Sales.columns.foreach(println(_))
+      var SalesDistr =Sales.groupBy("prodID").sum("amount","quantity")
+      SalesDistr = SalesDistr.alias("n").join(Products,SalesDistr("prodID")===Products("prodID"),"inner")
+        .select(col("n.prodID"),
+          col("name"),
+          col("sum(amount)").as("Total amount"),
+          col("sum(quantity)").as("Total quantity"))
+      SalesDistr.show()
+      while(true){}
+    }
+}
+```
+
