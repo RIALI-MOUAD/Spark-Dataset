@@ -123,3 +123,23 @@ After defining the path to the textFile, I set a schema to control the inputs of
 Then, I called [read.csv(/path/to/file)](https://spark.apache.org/docs/latest/api/scala/org/apache/spark/sql/SparkSession.html#read:org.apache.spark.sql.DataFrameReader) with the following options :
 * "sep" : "|" => the separator
 * "header" : true => The first line contains the columns names
+
+As result , I got the following output :
+```
++------+---------+--------+-----------+
+|CustID|Firstname|Lastname|      Phone|
++------+---------+--------+-----------+
+|815001|    LYNCH| JACKSON|14157317623|
+|815002|     MOSS|  FIELDS|14156874907|
+|815003|   MCCALL|   BOYLE|14151620323|
+|815004| DELACRUZ|  MADDEN|14151364678|
+|815005|     RUIZ|    CAIN|14155195074|
++------+---------+--------+-----------+
+only showing top 5 rows
+
+root
+ |-- CustID: integer (nullable = true)
+ |-- Firstname: string (nullable = true)
+ |-- Lastname: string (nullable = true)
+ |-- Phone: string (nullable = true)
+```
