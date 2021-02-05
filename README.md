@@ -13,6 +13,33 @@ This project is based on 4 different datasets which are 4 text files with the de
 ![alt text](https://github.com/RIALI-MOUAD/RIALI-MOUAD-Spark-Resilient-Distributed-Dataset/blob/main/data%20warehouse.png)
 
 ## Building Project !
+### General structure :
+```bash
+.:
+build.sbt     Product.txt  README.md   Sales.txt          src
+Customer.txt  project      Refund.txt  Scala_project.pdf
+
+./project:
+build.properties  project
+
+./project/project:
+
+./src:
+main  test
+
+./src/main:
+scala
+
+./src/main/scala:
+DataFrameFromFile.scala  SalesDistribution.scala     UserProducts.scala
+Sales2013.scala          Scala2013MinusRefund.scala
+
+./src/test:
+scala
+
+./src/test/scala:
+```
+
 ### build.sbt :
 In this kind of projects. We have always to set up the"[build.sbt]()" file, which contains in this case :
 ```scala
