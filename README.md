@@ -88,6 +88,7 @@ object DataFrameFromFile {
 ```
 
 Besides the immutable variable [sc] which generates  "[SparkSession](https://spark.apache.org/docs/latest/api/scala/org/apache/spark/sql/SparkSession.html)" Object, I created 4 functions, each one of them generates a specefic [DataFrame](https://spark.apache.org/docs/latest/api/scala/org/apache/spark/sql/index.html#DataFrame=org.apache.spark.sql.Dataset[org.apache.spark.sql.Row]) : Customer, Product, Sales, Refund.
+
 Let's take the example of getCustomer:
 ```scala
  def getCustomer: org.apache.spark.sql.DataFrame ={
