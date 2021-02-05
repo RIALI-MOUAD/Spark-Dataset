@@ -55,3 +55,34 @@ As it is obvious, the [build.sbt]() contains :
   - sbt version : 1.0
   - Scala version : 2.12.13
   - libraryDependencies : here I only used one dependency which is "org.apache.spark"%%"spark-sql" % "3.0.1" 
+  
+### From textFile to DataFrame :
+
+To build the project we have first to think about :
+> How to generate DataFrame from textFile ?
+
+The answer that I have chosen is to create a Scala object which does the job, I called it [DataFrameFromFile]():
+```scala
+object DataFrameFromFile {
+  val sc: SparkSession = SparkSession.builder()
+    .master("local[1]")
+    .appName("SparkII")
+    .getOrCreate()
+  def getCustomer: org.apache.spark.sql.DataFrame ={...}
+  def getProduct: org.apache.spark.sql.DataFrame ={...}
+  def getSales: org.apache.spark.sql.DataFrame ={...}
+  def getRefund: org.apache.spark.sql.DataFrame ={...}
+    def main(args:Array[String]) = {
+    import sc.implicits._
+    this.getCustomer.show(5)
+    this.getCustomer.printSchema()
+    this.getProduct.show(5)
+    this.getProduct.printSchema()
+    this.getSales.show(5)
+    this.getSales.printSchema()
+    this.getRefund.show(5)
+    this.getRefund.printSchema()
+    //while(true){}
+  }
+}
+```
