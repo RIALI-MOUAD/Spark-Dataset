@@ -185,7 +185,7 @@ First I defined Two immutable variables **Sales** and **Products**. Each present
       val Sales = /*This function*/getSales
       val Products =/*This Function*/getProduct
 ```
-After setting a new DataFrame based on  *Sales* Grouped By Foreign Key : *prodID* , by summing the values of those following columns : **amount** *&* **quantity** :
+The next step is setting a new DataFrame based on  *Sales* Grouped By Foreign Key : *prodID* , by summing the values of those following columns : **amount** *&* **quantity** :
 ```scala
 var SalesDistr =Sales.groupBy("prodID").sum("amount","quantity")
 ```
