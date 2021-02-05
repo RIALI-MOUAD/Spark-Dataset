@@ -287,7 +287,7 @@ Finally, I calculate the Total amount by applying the *sum* mrthod on the *Array
 ```
 #### Final Result :
 > ## Voila !!
-
+```
 +------+------+------+-------------------+------+--------+
 |  txID|custID|prodID|          timestamp|amount|quantity|
 +------+------+------+-------------------+------+--------+
@@ -313,4 +313,9 @@ Finally, I calculate the Total amount by applying the *sum* mrthod on the *Array
 |115068|815485|  1120|03/23/2013 01:16:07|  1745|       5|
 +------+------+------+-------------------+------+--------+
 only showing top 20 rows
+```
+And the Total amount of sales in 2013 is :
 
+```
+1637540
+```
