@@ -117,3 +117,9 @@ CustID|Firstname|Lastname|Phone
 815005|RUIZ|CAIN|14155195074
 ...
 ```
+
+After defining the path to the textFile, we set a schema to control the inputs of the Dataset by creating a [StructType](https://spark.apache.org/docs/latest/api/scala/org/apache/spark/sql/types/StructType.html) object using Array<[StructField(name: String, dataType: DataType, nullable: Boolean = true)](https://spark.apache.org/docs/latest/api/scala/org/apache/spark/sql/types/StructField.html)>  
+
+Then, I called [read.csv(/path/to/file)](https://spark.apache.org/docs/latest/api/scala/org/apache/spark/sql/SparkSession.html#read:org.apache.spark.sql.DataFrameReader) with the following options :
+* "sep" : "|" => the separator
+* "header" : true => The first line contains the columns names
