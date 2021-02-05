@@ -122,7 +122,7 @@ After defining the path to the textFile, I set a schema to control the inputs of
 
 Then, I called [read.csv(/path/to/file)](https://spark.apache.org/docs/latest/api/scala/org/apache/spark/sql/SparkSession.html#read:org.apache.spark.sql.DataFrameReader) with the following options :
 * "sep" : "|" => the separator
-* "header" : true => The first line contains the columns names
+* "header" : true => The first line contains columns names
 
 As result , I got the following output :
 ```
