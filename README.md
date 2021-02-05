@@ -189,3 +189,9 @@ The next step is setting a new DataFrame based on  *Sales* Grouped By Foreign Ke
 ```scala
 var SalesDistr =Sales.groupBy("prodID").sum("amount","quantity")
 ```
+
+Finally, we call the *[join]()* method to do an **inner join** between *SalesDistr* and *Products* without forgetting to select the following columns :
+> - name : product name
+> - prodID : product ID
+> - Total amount : Total amount of each of sold products
+> - Total quantity : Total quantity of each of sold products
