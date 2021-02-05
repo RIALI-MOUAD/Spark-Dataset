@@ -195,3 +195,35 @@ Finally, we call the *[join]()* method to do an **inner join** between *SalesDis
 > - prodID : product ID
 > - Total amount : Total amount of each of sold products
 > - Total quantity : Total quantity of each of sold products
+
+
+#### Final Result :
+> ## Voila :
+
+```
++------+--------------------+------------+--------------+
+|prodID|                name|Total amount|Total quantity|
++------+--------------------+------------+--------------+
+|  1127|        Memory card |       12901|           679|
+|  1125|           Keyboard |       68112|           688|
+|  1114|           Harddisk |       74943|           757|
+|  1122|      Kids's tablet |       59103|           597|
+|  1130|       Baby Monitor |      223011|           639|
+|  1113|            Desktop |      949095|           655|
+|  1128|            Speaker |      101022|           678|
+|  1132|      Car Connector |      168392|           776|
+|  1119|          Camcorder |      195546|           654|
+|  1124|              Drone |       63991|           719|
+|  1123|    VR Play Station |      139499|           701|
+|  1121|            Monitor |      108174|           726|
+|  1118|             Camera |      332334|           666|
+|  1116|             Tablet |      517260|           740|
+|  1111|              Phone |      339034|           566|
+|  1126|        Magic Mouse |       70488|           712|
+|  1131|    Doorbell Carema |      132057|           603|
+|  1115|      GamingConsole |      167328|           672|
+|  1120|            Printer |      261052|           748|
+|  1129|Home Automation Kit |      632367|           633|
++------+--------------------+------------+--------------+
+only showing top 20 rows
+```
