@@ -319,3 +319,58 @@ And the Total amount of sales in 2013 is :
 ```
 1637540
 ```
+
+#### 3- Sales 2013 (Except Refund):
+
+##### Description :
+This sub-project is meant to calculate total amount of sales happened in *2013* , except refund(remboursés).
+##### Employed Datasets :
+- Sales.txt
+- Refund.txt
+##### Objects :
+###### DataFrameFromFile.scala :
+The reason behind calling this object is to generate the Dataframes that we'll employ later to serve the project role as we are going to see in the main project object.
+###### Sales2013.scala :
+In this project we'll use the function *AreSales2013* to drop non useful data 
+
+###### Scala2013MinusRefund.scala : 
+The main object of this sub-project which looks like this :
+```scala
+object Scala2013MinusRefund {
+  //val sc :SparkSession = sc
+
+  def main(args: Array[String]): Unit = {
+    val sales2013 =getSales.filter(Row => AreSales2013(Row(3).toString))
+    val refundGrouped = getRefund.groupBy("txID").count()
+    val SalesMinusRefund= sales2013.alias("s")
+      .join(refundGrouped,sales2013("txID")===refundGrouped("txID"),"leftanti")
+    SalesMinusRefund.show(30)
+    println(s"${SalesMinusRefund.select("amount")
+      .rdd.map(r=>r(0).asInstanceOf[Int])
+      .collect().sum} is the total amount of sales not refunded")
+  }
+}
+```
+
+> How does it work ?
+
+First I defined Two immutable variables **sales2013** and **refundGrouped**. Each presents an "*org.apache.spark.sql.DataFrame*" object, generated of this two functions herited from the **DataFrameFromFile** and **Sales2013** objects :
+
+```scala 
+    val sales2013 =getSales.filter(Row => AreSales2013(Row(3).toString))
+    val refundGrouped = getRefund.groupBy("txID").count()
+```
+Then I define the DataFrame **SalesMinusRefund** that contains the data in **sales2013** that do not appear in **refundGrouped** by ensuring a *leftanti* join using the foreign key *txID* between those last DataFrames  :
+```scala
+ val SalesMinusRefund= sales2013.alias("s").join(refundGrouped,sales2013("txID")===refundGrouped("txID"),"leftanti")
+```
+After we got the *SalesMinusRefund* DataFrame , We are interested just in the *amount* column, so I isolate it by movin its values to an *Array<Int>* and calculate the sum of all of its elements:  
+  
+```scala
+  println(s"${SalesMinusRefund.select("amount")
+      .rdd.map(r=>r(0).asInstanceOf[Int])
+      .collect().sum} is the total amount of sales not refunded")
+```
+
+#### Final Result :
+> ## Voila !!
