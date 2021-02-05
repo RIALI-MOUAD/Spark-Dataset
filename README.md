@@ -58,7 +58,7 @@ As it is obvious, the [build.sbt]() contains :
   
 ### From textFile to DataFrame :
 
-To build the project we have first to think about :
+To build the project,first we have to think about :
 > How to generate DataFrame from textFile ?
 
 The answer that I have chosen is to create a Scala object which does the job, I called it [DataFrameFromFile]():
