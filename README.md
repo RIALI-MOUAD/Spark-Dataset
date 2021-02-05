@@ -178,3 +178,11 @@ object SalesDistribution {
 }
 ```
 
+> How does it work ?
+
+First I defined Two immutable variables **Sales** and **Products**. Each presents an "*org.apache.spark.sql.DataFrame*" object, generated of this two functions herited from the **DataFrameFromFile** object :
+```scala 
+      val Sales = /*This function*/getSales
+      val Products =/*This Function*/getProduct
+```
+
