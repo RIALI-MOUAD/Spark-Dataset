@@ -227,3 +227,64 @@ Finally, we call the *[join]()* method to do an **inner join** between *SalesDis
 +------+--------------------+------------+--------------+
 only showing top 20 rows
 ```
+
+
+
+#### 2- Sales 2013 :
+
+##### Description :
+This sub-project is meant to calculate total amount of sales happened in *2013*.
+##### Employed Datasets :
+- Sales.txt
+##### Objects :
+###### DataFrameFromFile.scala :
+The reason behind calling this object is to generate the Dataframes that we'll employ later to serve the project role as we are going to see in the main project object.
+###### Sales2013.scala : 
+The main object of this sub-project which looks like this :
+```scala
+object Sales2013 {
+  //val sc : SparkSession  = sc
+
+   def AreSales2013(Timestamp: String): Boolean = {
+    Timestamp.contains("2013")
+  }
+  def main(args: Array[String]): Unit = {
+    val Sales = getSales
+    val Sales2013 = Sales.filter(Row => AreSales2013(Row(3).toString))
+    Sales2013.show()
+    val amount= Sales2013.select("amount").rdd.map(r=>r(0).asInstanceOf[Int]).collect()
+    println(amount.sum)
+  }
+}
+```
+
+> How does it work ?
+
+First I defined 1 immutable variable **Sales** which presents an "*org.apache.spark.sql.DataFrame*" object, generated of this  function herited from the **DataFrameFromFile** object :
+```scala 
+      val Sales = /*This function*/getSales
+```
+Then I define the function **AreSales2013** that returns a Boolean which tells if the *Timestamp* variable contains *2013* or not :
+```scala
+   def AreSales2013(Timestamp: String): Boolean = {
+    Timestamp.contains("2013")
+  }
+```
+In addition to that, I create a new DataFrame *Sales2013* wihch contains only the sales happened in 2013 by applying a filter on the intial *Sales* DataFrame :
+```scala
+    val Sales2013 = Sales.filter(Row => AreSales2013(Row(3).toString))
+```
+After we got the *Sales2013* DataFrame , We are interested just in the *amount* column, so I isolate it by movin its values to an *Array<Int>* :  
+  
+```scala
+    val amount= Sales2013.select("amount").rdd.map(r=>r(0).asInstanceOf[Int]).collect()
+```
+
+Finally, I calculate the Total amount by applying the *sum* mrthod on the *Array<Int>* that we got in the previous step :
+  
+``` scala
+    println(amount.sum)
+```
+#### Final Result :
+> ## Voila !!
+
