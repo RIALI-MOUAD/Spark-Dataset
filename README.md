@@ -61,7 +61,7 @@ As it is obvious, the [build.sbt]() contains :
 To build the project,first we have to think about :
 > How to generate DataFrame from textFile ?
 
-The answer that I have chosen is to create a Scala object which does the job, I called it [DataFrameFromFile]():
+The answer that I have chosen were to create a Scala object which does the job, I have called it [DataFrameFromFile]():
 ```scala
 object DataFrameFromFile {
   val sc: SparkSession = SparkSession.builder()
@@ -155,7 +155,7 @@ This sub-project is meant to evaluate the amount and quantity for each product n
 - Sales.txt
 ##### Objects :
 ###### DataFrameFromFile.scala :
-The reason behind calling this object is to generate the Dataframes that we'll employ later to serve the project role as we are going to see in the main project object.
+The reason behind calling this object is to generate the Dataframes that we would employ later to serve the project role as we are going to see in the main project object.
 ###### SalesDistribution.scala : 
 The main object of this sub-project which looks like this :
 ```scala
@@ -198,8 +198,7 @@ Finally, we call the *[join]()* method to do an **inner join** between *SalesDis
 
 
 #### Final Result :
-> ## Voila !!
-
+> **** Voila !!
 ```
 +------+--------------------+------------+--------------+
 |prodID|                name|Total amount|Total quantity|
@@ -264,13 +263,13 @@ First I defined 1 immutable variable **Sales** which presents an "*org.apache.sp
 ```scala 
       val Sales = /*This function*/getSales
 ```
-Then I define the function **AreSales2013** that returns a Boolean which tells if the *Timestamp* variable contains *2013* or not :
+Then I defined the function **AreSales2013** that returns a Boolean which tells if the *Timestamp* variable contains *2013* or not :
 ```scala
    def AreSales2013(Timestamp: String): Boolean = {
     Timestamp.contains("2013")
   }
 ```
-In addition to that, I create a new DataFrame *Sales2013* wihch contains only the sales happened in 2013 by applying a filter on the intial *Sales* DataFrame :
+In addition to that, I created a new DataFrame *Sales2013* wihch contains only the sales happened in 2013 by applying a filter on the intial *Sales* DataFrame :
 ```scala
     val Sales2013 = Sales.filter(Row => AreSales2013(Row(3).toString))
 ```
@@ -280,13 +279,13 @@ After we got the *Sales2013* DataFrame , We are interested just in the *amount* 
     val amount= Sales2013.select("amount").rdd.map(r=>r(0).asInstanceOf[Int]).collect()
 ```
 
-Finally, I calculate the Total amount by applying the *sum* mrthod on the *Array<Int>* that we got in the previous step :
+Finally, I calculated the Total amount by applying the *sum* mrthod on the *Array<Int>* that we got in the previous step :
   
 ``` scala
     println(amount.sum)
 ```
 #### Final Result :
-> ## Voila !!
+> **** Voila !!
 ```
 +------+------+------+-------------------+------+--------+
 |  txID|custID|prodID|          timestamp|amount|quantity|
@@ -331,7 +330,7 @@ This sub-project is meant to calculate total amount of sales happened in *2013* 
 ###### DataFrameFromFile.scala :
 The reason behind calling this object is to generate the Dataframes that we'll employ later to serve the project role as we are going to see in the main project object.
 ###### Sales2013.scala :
-In this project we'll use the function *AreSales2013* to drop non useful data 
+In this project we would use the function *AreSales2013* to drop non useful data 
 
 ###### Scala2013MinusRefund.scala : 
 The main object of this sub-project which looks like this :
@@ -373,7 +372,7 @@ After we got the *SalesMinusRefund* DataFrame , We are interested just in the *a
 ```
 
 #### Final Result :
-> ## Voila !!
+> **** Voila !!
 ```
 +------+------+------+-------------------+------+--------+
 |  txID|custID|prodID|          timestamp|amount|quantity|
@@ -472,7 +471,7 @@ Next, I create the DataFrame **SalesperCustomer** by joining ***SalesperCustomer
 ```
 
 #### Final Result :
-> ## Voila !!
+> **** Voila !!
 
 Finally we got :
 ```
